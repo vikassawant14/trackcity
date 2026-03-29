@@ -2,27 +2,21 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const weatherRoutes = require("./routes/weather");
-const trafficRoutes = require("./routes/traffic");
-const eventRoutes = require("./routes/event");
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/weather", weatherRoutes);
-app.use("/api/traffic", trafficRoutes);
-app.use("/api/event", eventRoutes);
+// Serve frontend files
+app.use(express.static(path.join(__dirname, "../frontend")));
 
-app.use(express.static(path.join(__dirname,"public")));
-
-app.get("/",(req,res)=>{
-res.sendFile(path.join(__dirname,"public","index.html"));
+// Open main website page
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/trackcitymood.html"));
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
-app.listen(PORT,()=>{
-console.log("Server running");
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
 });
