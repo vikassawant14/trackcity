@@ -4,7 +4,7 @@ const path = require("path");
 
 const weatherRoutes = require("./routes/weather");
 const trafficRoutes = require("./routes/traffic");
-const eventRoutes = require("./routes/events");
+const eventRoutes = require("./routes/event");
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use("/api/weather", weatherRoutes);
 app.use("/api/traffic", trafficRoutes);
-app.use("/api/events", eventRoutes);
+app.use("/api/event", eventRoutes);
 
 app.use(express.static(path.join(__dirname,"public")));
 
